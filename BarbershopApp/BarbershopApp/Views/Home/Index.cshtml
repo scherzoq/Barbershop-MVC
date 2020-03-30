@@ -1,0 +1,128 @@
+﻿@using BarbershopApp.Models
+@model IEnumerable<BarbershopApp.Models.Customer>
+
+<h3>Enter customer name or phone # for wait position:</h3>
+@using (Html.BeginForm("GetPositionByName", "Home", FormMethod.Post))
+{
+    <label for="name">Full name:</label>
+    <input type="text" name="name">
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+}
+@using (Html.BeginForm("GetPositionByPhone", "Home", FormMethod.Post))
+{
+    <label for="name">Phone ("xxx-xxx-xxxx" format):</label>
+    <br>
+    <input type="text" name="phone">
+    <br>
+    <button type="submit">Submit</button>
+    <br>
+}
+<label>Wait position:</label> @ViewBag.Position
+<br>
+
+<h3>Enter barber name to sort waiting list:</h3>
+@using (Html.BeginForm("BarberWaitlist", "Home", FormMethod.Post))
+{
+    <div>
+        <label for="barber">Barber name:</label>
+        <input type="text" name="barber"><br>
+        <button type="submit">Submit</button>
+    </div>
+}
+
+<h2>Waiting List</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Position
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Phone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Barber)
+        </th>
+        <th>
+            To Chair
+        </th>
+    </tr>
+
+    @{
+        var counter = 0;
+    }
+
+    @foreach (var item in Model)
+    {
+        using (Html.BeginForm("ToChair", "Home", FormMethod.Post))
+        {
+            <input type="hidden" name="Name" value="@item.FullName" />
+            <tr>
+                <td>
+                    @(++counter)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FullName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Phone)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Barber)
+                </td>
+                <td>
+                    <button type="submit">In Chair</button>
+                </td>
+            </tr>
+        }
+    }
+</table>
+
+<h2>Active Haircuts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Barber
+        </th>
+        <th>
+            Customer
+        </th>
+        <th>
+            Remove from Chair
+        </th>
+    </tr>
+
+    @foreach (var bar in ViewData["barbers"] as IList<Barber>)
+    {
+        using (Html.BeginForm("EmptyChair", "Home", FormMethod.Post))
+        {
+            <input type="hidden" name="Name" value="@bar.FirstName" />
+            <tr>
+                <td>
+                    @bar.FirstName
+                </td>
+                @if (bar.Customer != null)
+                {
+                    <td>
+                        @bar.Customer.FullName
+                    </td>
+                }
+                else
+                {
+                    <td>
+                        None
+                    </td>
+                }
+                <td>
+                    <button type="submit">Remove from Chair</button>
+                </td>
+            </tr>
+        }
+    }
+</table>
