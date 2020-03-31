@@ -13,5 +13,9 @@ namespace BarbershopApp.Models
 		public string Phone { get; set; }
 		[Display(Name = "Requested Barber")]
 		public string Barber { get; set; }
+		[Display(Name = "Expected Waiting Time")]
+		public TimeSpan WaitingTime { get; set; }
+		[Display(Name = "Expected Seating Time")]
+		public DateTime SeatingTime { get; set; }
 	}
 }

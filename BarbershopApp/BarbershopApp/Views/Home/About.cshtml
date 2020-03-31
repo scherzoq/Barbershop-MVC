@@ -1,7 +1,71 @@
 ﻿@{
-    ViewBag.Title = "About";
+    ViewBag.Title = "About this Application";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<h2>@ViewBag.Title</h2>
 
-<p>Use this area to provide additional information.</p>
+<p>
+    For this coding challenge, I worked on two user stories for an MVC application for a barbershop waiting
+    list. The requirements of the coding challenge, on my end, were limited in scope to what is presented
+    here.</p>
+
+<p> I did have to meet a number of specific acceptance criteria for the two user stories I worked on,
+    such as the following functionalities: searching a customer's position in line by name or phone number,
+    sorting the waiting list by a specfic barber, implementing an "in chair" button to move a customer to
+    a barber's chair, displaying expected wait times, and more.</p>
+
+<p> But certain essential functionalities -- most notably, adding new customers to the waiting list --
+    were outside the scope of the user stories that I worked on, and that is why they are currently omitted
+    from this application.</p>
+
+<br />
+
+<h3>Notes on Specific Components</h3>
+
+<strong>"In Chair" and "Empty Chair" Buttons</strong>
+<p>Clicking the "Empty Chair" Button simply removes a customer from a barber's chair once their haircut is complete.</p>
+<p>Clicking the "In Chair" button can result in a few outcomes:
+    <ul>
+        <li>The "In Chair" button moves a customer to their requested barber's chair so long as it is unoccupied.</li>
+        <li>
+            If that chair is occupied (OR if there is no requested barber), then the program will search through
+            the list of barbers and move the customer to the first available chair.
+        </li>
+        <li>
+            If ALL chairs are taken, then nothing will happen (customers MUST be moved out of barbers' chairs, first,
+            using the "Empty Chair" button).
+        </li>
+    </ul>
+</p>
+
+<br />
+
+<strong>Expected Wait Times</strong>
+<p>
+    The expected wait times use the following assumptions:
+    <ul>
+        <li>A haircut takes 15 minutes.</li>
+        <li>There are 90 seconds of cleanup required after each haircut.</li>
+        <li>
+            Specific barber requests are IGNORED for these particular calculations,
+            since each customer on the waiting list is permitted to change their mind
+            and go with the first available barber when it is their turn (hence the
+            open-ended functionality of the "in chair" button described above).
+        </li>
+    </ul>
+    </p>
+    <p>The factors that are used to calculate wait times are:
+        <ul>
+            <li>
+                the total number of working barbers (the calculation will still work if
+                an additional barber is added)
+            </li>
+            <li>
+                the number of active haircuts AT THE TIME that the home page is loaded or reloaded
+            </li>
+        </ul>
+        Note that the method which calculates wait times does NOT track how much time has elapsed
+        since the last time the home page was loaded, and will therefore not readjust expected wait
+        times UNTIL customers are moved out of/into chairs. It also does not know WHEN
+        a customer was moved into their chair. It estimates only based on knowledge of the two factors
+        listed above.    
+</p>
