@@ -9,22 +9,19 @@ namespace BarbershopApp.Controllers
 {
 	public class HomeController : Controller
 	{
-		// private static variables used to maintain the state of the customer
-		// waiting list and active haircuts list (see NOTE below)
-
-		// NOTE: For this coding project, I was originally asked to share my
-		// code using an online IDE such as dotnetfiddle -- which is where I
-		// began coding this project. Dotnetfiddle's MVC template is very simple,
-		// with no database support -- so I used flexible solutions (such as private
-		// static lists in lieu of a database) to try to get my code to work
-		// there. Eventually, I found that dotnetfiddle simply could not support
-		// the requirements of this project (even with my attempts to implement
-		// flexible solutions). So I moved my code to Visual Studio and continued
-		// coding the project there. However, I still retained a good amount of
-		// the overall design structure from my dotnetfiddle code, such as the
-		// private static variables to maintain data state, and this is why a few
-		// of the design choices in this program may vary from more commonly seen
-		// MVC design.
+		// NOTE: the user stories presented here are limited in scope to specific
+		// functionalities of a barbershop waiting list; these do NOT include
+		// database creation/maintenance.
+		//
+		// At present, therefore, no database is yet used in this application.
+		// To meet the needs of the specific user stories worked on for this
+		// project, private static lists (populated with sample data) are used as
+		// a straightforward solution to maintain the state of the waiting list
+		// and the active haircuts.
+		//
+		// (But it is assumed that a database of all customers (new/returning) could
+		// nonetheless later be implemented, and necessary modifications made at
+		// that stage in the process.)
 		private static List<Customer> customers = new List<Customer>()
 		{
 		new Customer{FullName="George Washington",Phone="202-456-1111",Barber="Joe"},
@@ -198,7 +195,7 @@ namespace BarbershopApp.Controllers
 		// the method does NOT track how much time has elapsed since the last time the
 		// index action was called, and will therefore not readjust expected wait times
 		// UNTIL customers are moved out of/into chairs). It also does not know when
-		// a customer was moved into their chair. It estimates only based on the two
+		// a customer was moved into their chair. It estimates ONLY based on the two
 		// factors listed above.
 		public static void CustomerWaitingTime(DateTime currentTime)
 		{

@@ -8,14 +8,14 @@
     list. The requirements of the coding challenge, on my end, were limited in scope to what is presented
     here.</p>
 
-<p> I did have to meet a number of specific acceptance criteria for the two user stories I worked on,
+<p> I had to meet a number of specific acceptance criteria for the two user stories I worked on,
     such as the following functionalities: searching a customer's position in line by name or phone number,
     sorting the waiting list by a specfic barber, implementing an "in chair" button to move a customer to
-    a barber's chair, displaying expected wait times, and more.</p>
+    a barber's chair, and displaying expected wait times.</p>
 
-<p> But certain essential functionalities -- most notably, adding new customers to the waiting list --
-    were outside the scope of the user stories that I worked on, and that is why they are currently omitted
-    from this application.</p>
+<p> But certain essential functionalities -- most notably, adding new customers to the waiting list and database
+    creation/maintenance -- were outside the scope of the user stories that I worked on, and that is why they
+    are currently omitted from this application.</p>
 
 <br />
 
@@ -45,27 +45,30 @@
     <ul>
         <li>A haircut takes 15 minutes.</li>
         <li>There are 90 seconds of cleanup required after each haircut.</li>
+    </ul>
+<p>
+    Please note that specific barber requests are IGNORED for these particular calculations,
+    since each customer on the waiting list is permitted to change their mind
+    and go with the first available barber when it is their turn (hence the
+    open-ended functionality of the "in chair" button described above).
+</p>
+<p> The program does NOT know when each active haircut started, and instead uses math/probability
+    to calculate the expected (average) amount of time it will take for seats to open up. To elaborate
+    on the this, the ONLY factors that are used to calculate wait times are:
+    <ul>
         <li>
-            Specific barber requests are IGNORED for these particular calculations,
-            since each customer on the waiting list is permitted to change their mind
-            and go with the first available barber when it is their turn (hence the
-            open-ended functionality of the "in chair" button described above).
+            the total number of working barbers (the calculation will still work if
+            an additional barber is added)
+        </li>
+        <li>
+            the number of active haircuts AT THE TIME that the home page is loaded or reloaded
         </li>
     </ul>
-    </p>
-    <p>The factors that are used to calculate wait times are:
-        <ul>
-            <li>
-                the total number of working barbers (the calculation will still work if
-                an additional barber is added)
-            </li>
-            <li>
-                the number of active haircuts AT THE TIME that the home page is loaded or reloaded
-            </li>
-        </ul>
-        Note that the method which calculates wait times does NOT track how much time has elapsed
-        since the last time the home page was loaded, and will therefore not readjust expected wait
-        times UNTIL customers are moved out of/into chairs. It also does not know WHEN
-        a customer was moved into their chair. It estimates only based on knowledge of the two factors
-        listed above.    
+    The method which calculates wait times does NOT track how much time has elapsed
+    since the last time the home page was loaded, and will not readjust expected wait
+    times UNTIL actions are taken (customers are moved out of/into chairs). It also does not track WHEN
+    a customer was moved into their chair. It is important to emphasize that it is a method that
+    does no more or less than the following: it considers how many barbers are working and how many active
+    haircuts are taking place at any given moment, and use this information alone to estimate a wait time
+    for every customer on the wait list.
 </p>
