@@ -21,6 +21,8 @@ With Visual Studio installed, take the following steps to run the program:
 3. Press Ctrl + F5 to run the program
 
 ## Notes on Specific Components
+* ["In Chair" and "Empty Chair" Buttons](#in-chair-and-empty-chair-buttons)
+* [Expected Wait Times](#expected-wait-times)
 
 ### "In Chair" and "Empty Chair" Buttons
 Clicking the "Empty Chair" Button simply removes a customer from a barber's chair once their haircut is complete.
